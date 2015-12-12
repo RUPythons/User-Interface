@@ -1,22 +1,28 @@
 from tkinter import *
 from tkinter import ttk
 
-def find(*args):
+def find(*args):                                                # Gets called when find button is clicked
     try:
-        value = float(feet.get())
-        meters.set((0.3048 * value * 10000.0 + 0.5)/10000.0)
+        value = float(path.get())                               # Will get the path from the input box
+        result1.set(1)                                          # Needs to be  modified to give out image URL results by doing the lookup
+        result2.set(2)
+        result3.set(3)
+        result4.set(4)
+        result5.set(5)
+        result6.set(6)
+        result7.set(7)
     except ValueError:
         pass
     
 root = Tk()
-root.title("Pattern Recognizier")
+root.title("Pattern Recognizier")                               # Title of the window
 
-mainframe = ttk.Frame(root, padding="3 3 12 12")
+mainframe = ttk.Frame(root, padding="3 3 12 12")                # Making of a Frame
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 mainframe.columnconfigure(0, weight=10)
 mainframe.rowconfigure(0, weight=10)
 
-path = StringVar()
+path = StringVar()                                              # Variables holding path and results 
 result1 = StringVar()
 result2 = StringVar()
 result3 = StringVar()
@@ -25,7 +31,7 @@ result5 = StringVar()
 result6 = StringVar()
 result7 = StringVar()
 
-path_entry = ttk.Entry(mainframe, width=20, textvariable=path)
+path_entry = ttk.Entry(mainframe, width=20, textvariable=path)  
 path_entry.grid(column=2, row=1, sticky=(W, E))
 
 ttk.Label(mainframe, textvariable=result1).grid(column=2, row=3, sticky=(W, E))
