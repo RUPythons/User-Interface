@@ -3,7 +3,7 @@ from tkinter import ttk
 
 def find(*args):                                                # Gets called when find button is clicked
     try:
-        value = float(path.get())                               # Will get the path from the input box
+        value = path.get()                                      # Will get the path from the input box
         result1.set(1)                                          # Needs to be  modified to give out image URL results by doing the lookup
         result2.set(2)
         result3.set(3)
