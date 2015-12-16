@@ -1,57 +1,51 @@
+#!/usr/bin/python
+
+
 from tkinter import *
 from tkinter import ttk
+from imagesearch import imageSearch
+from PIL import Image
 
-def find(*args):                                                # Gets called when find button is clicked
+def find():          # Gets called when find button is clicked
     try:
-        value = path.get()                                      # Will get the path from the input box
-        result1.set(1)                                          # Needs to be  modified to give out image URL results by doing the lookup
-        result2.set(2)
-        result3.set(3)
-        result4.set(4)
-        result5.set(5)
-        result6.set(6)
-        result7.set(7)
+        value1 = dataset.get()              # Will get the path from the input box
+        value2 = shlv.get()
+        value3 = query.get()
+        files = imageSearch(value1, value2, value3)
+        for i in files:
+            image = Image.open(value1 + "/" + str(i))
+            image.show()
     except ValueError:
         pass
     
 root = Tk()
-root.title("Pattern Recognizier")                               # Title of the window
+root.title("Fabric Finder")                # Title of the window
 
 mainframe = ttk.Frame(root, padding="3 3 12 12")                # Making of a Frame
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
 mainframe.columnconfigure(0, weight=10)
 mainframe.rowconfigure(0, weight=10)
 
-path = StringVar()                                              # Variables holding path and results 
-result1 = StringVar()
-result2 = StringVar()
-result3 = StringVar()
-result4 = StringVar()
-result5 = StringVar()
-result6 = StringVar()
-result7 = StringVar()
+dataset = StringVar()
+shlv = StringVar()                                            # Variables holding path and results 
+query = StringVar()
 
-path_entry = ttk.Entry(mainframe, width=20, textvariable=path)  
+
+path_entry = ttk.Entry(mainframe, width=20, textvariable=dataset)  
 path_entry.grid(column=2, row=1, sticky=(W, E))
 
-ttk.Label(mainframe, textvariable=result1).grid(column=2, row=3, sticky=(W, E))
-ttk.Label(mainframe, textvariable=result2).grid(column=2, row=4, sticky=(W, E))
-ttk.Label(mainframe, textvariable=result3).grid(column=2, row=5, sticky=(W, E))
-ttk.Label(mainframe, textvariable=result4).grid(column=2, row=6, sticky=(W, E))
-ttk.Label(mainframe, textvariable=result5).grid(column=2, row=7, sticky=(W, E))
-ttk.Label(mainframe, textvariable=result6).grid(column=2, row=8, sticky=(W, E))
-ttk.Label(mainframe, textvariable=result7).grid(column=2, row=9, sticky=(W, E))
-ttk.Button(mainframe, text="find", command=find).grid(column=3, row=10, sticky=W)
+path_entry = ttk.Entry(mainframe, width=20, textvariable=shlv)  
+path_entry.grid(column=2, row=2, sticky=(W, E))
 
-ttk.Label(mainframe, text="Enter path to your image").grid(column=3, row=1, sticky=W)
-ttk.Label(mainframe, text="Following are the results found:").grid(column=1, row=2, sticky=E)
-ttk.Label(mainframe, text="First").grid(column=1, row=3, sticky=E)
-ttk.Label(mainframe, text="Second").grid(column=1, row=4, sticky=E)
-ttk.Label(mainframe, text="Third").grid(column=1, row=5, sticky=E)
-ttk.Label(mainframe, text="Fourth").grid(column=1, row=6, sticky=E)
-ttk.Label(mainframe, text="Fifth").grid(column=1, row=7, sticky=E)
-ttk.Label(mainframe, text="Sixth").grid(column=1, row=8, sticky=E)
-ttk.Label(mainframe, text="Seventh").grid(column=1, row=9, sticky=E)
+path_entry = ttk.Entry(mainframe, width=20, textvariable=query)  
+path_entry.grid(column=2, row=3, sticky=(W, E))
+
+ttk.Button(mainframe, text="find", command=find).grid(column=3, row=11, sticky=W)
+
+ttk.Label(mainframe, text="Enter directory name of image files").grid(column=3, row=1, sticky=W)
+ttk.Label(mainframe, text="Enter database filename").grid(column=3, row=2, sticky=W)
+ttk.Label(mainframe, text="Enter name of the sample image file").grid(column=3, row=3, sticky=W)
+ttk.Label(mainframe, text="Following are the results found:").grid(column=1, row=4, sticky=E)
 
 
 for child in mainframe.winfo_children(): child.grid_configure(padx=5, pady=5)
